@@ -1,4 +1,5 @@
 <script setup>
+import SidebarComponent from "../components/SidebarComponent.vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../auth/states/authStore";
 const auth = useAuthStore(), router = useRouter();
@@ -12,5 +13,6 @@ function logout() { auth.logout(); router.replace("/auth/login"); }
       <button type="button" class="rounded-lg bg-indigo-700 px-3 py-1 text-white" @click="logout">Keluar</button>
     </nav>
   </header>
+  <SidebarComponent />
   <main class="mx-auto max-w-5xl p-4"><RouterView /></main>
 </template>
