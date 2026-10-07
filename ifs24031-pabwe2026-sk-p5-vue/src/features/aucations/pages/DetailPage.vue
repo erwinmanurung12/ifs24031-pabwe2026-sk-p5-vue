@@ -5,12 +5,13 @@ import { getAucation, postBid, deleteAucation } from "../api/aucationApi";
 import { formatRupiah, formatDate, showErrorDialog, showSuccessDialog, showConfirmDialog } from "../../../helpers/toolsHelper";
 import { useInput } from "../../../hooks/useInput";
 const route = useRoute(), router = useRouter();
-const aucation = ref(null), isLoading = ref(true);
+const aucation = ref(null), isLoading = ref(true), errorMessage = ref("");
 const [bid, onBid] = useInput("");
 async function load() {
   isLoading.value = true;
+  errorMessage.value = "";
   try { const r = await getAucation(route.params.aucationId); aucation.value = r.data?.aucation ?? r.data; }
-  catch (e) { showErrorDialog(e.message); }
+  catch (e) { errorMessage.value = e.message; }
   finally { isLoading.value = false; }
 }
 async function submitBid() {
@@ -43,4 +44,8 @@ onMounted(load);
     </form>
     <button type="button" class="mt-4 rounded-lg bg-red-700 px-4 py-2 font-semibold text-white" @click="remove">Hapus lelang</button>
   </article>
+  <section v-else class="mt-4 rounded-xl bg-white p-6 shadow">
+    <h1 class="text-2xl font-extrabold">Lelang tidak ditemukan</h1>
+    <p role="alert" class="mt-2 text-slate-700">{{ errorMessage || "Data lelang tidak tersedia" }}</p>
+  </section>
 </template>
