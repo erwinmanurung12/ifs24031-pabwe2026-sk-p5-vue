@@ -1,0 +1,10 @@
+import { apiFetch } from "../../../helpers/apiHelper";
+export const getAucations = (params) => apiFetch("/aucations", { params });
+export const getAucation = (id) => apiFetch(`/aucations/${id}`);
+export const postAucation = (body) => apiFetch("/aucations", { method: "POST", body });
+export const putAucation = (id, body) => apiFetch(`/aucations/${id}`, { method: "PUT", body });
+export const postCover = (id, form) => apiFetch(`/aucations/${id}/cover`, { method: "POST", form });
+export const deleteAucation = (id) => apiFetch(`/aucations/${id}`, { method: "DELETE" });
+export const postBid = (id, body) => apiFetch(`/aucations/${id}/bids`, { method: "POST", body });
+export const deleteBid = (id) => apiFetch(`/aucations/${id}/bids`, { method: "DELETE" });
+export const deleteAllAucations = () => apiFetch("/aucations", { method: "DELETE" });
