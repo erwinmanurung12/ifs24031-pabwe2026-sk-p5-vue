@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import { getAccessToken } from "./helpers/apiHelper";
 import AuthLayout from "./features/auth/layouts/AuthLayout.vue";
 import AucationLayout from "./features/aucations/layouts/AucationLayout.vue";
+import LoginPage from "./features/auth/pages/LoginPage.vue";
+import RegisterPage from "./features/auth/pages/RegisterPage.vue";
 const routes = [
   { path: "/auth", component: AuthLayout, children: [
-    { path: "login", component: () => import("./features/auth/pages/LoginPage.vue") },
-    { path: "register", component: () => import("./features/auth/pages/RegisterPage.vue") } ] },
+    { path: "login", component: LoginPage },
+    { path: "register", component: RegisterPage } ] },
   { path: "/", component: AucationLayout, meta: { auth: true }, children: [
     { path: "", component: () => import("./features/aucations/pages/HomePage.vue") },
     { path: "users", component: () => import("./features/users/pages/UsersPage.vue") },
